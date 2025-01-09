@@ -1,0 +1,40 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Safe area boundary and information",
+    "required": [
+      "safeAreaId",
+      "deviceId",
+      "locationName",
+      "boundary"
+    ],
+    "properties": {
+      "safeAreaId": {
+        "bsonType": "string"
+      },
+      "deviceId": {
+        "bsonType": "string"
+      },
+      "locationName": {
+        "bsonType": "string"
+      },
+      "boundary": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "longitude": {
+              "bsonType": "double"
+            },
+            "latitude": {
+              "bsonType": "double"
+            }
+          }
+        }
+      },
+      "isEnabled": {
+        "bsonType": "bool"
+      }
+    }
+  }
+}

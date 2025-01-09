@@ -1,0 +1,34 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Device location",
+    "required": [
+      "deviceId",
+      "datePublished",
+      "description",
+      "longitude",
+      "latitude",
+      "statusCode"
+    ],
+    "properties": {
+      "deviceId": {
+        "bsonType": "string"
+      },
+      "datePublished": {
+        "bsonType": "date"
+      },
+      "description": {
+        "bsonType": "string"
+      },
+      "longitude": {
+        "bsonType": "double"
+      },
+      "latitude": {
+        "bsonType": "double"
+      },
+      "statusCode": {
+        "bsonType": "int"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Device information",
+    "required": [
+      "deviceId",
+      "safeAreaId",
+      "dateAdded",
+      "privateKey",
+      "isEnabled"
+    ],
+    "properties": {
+      "deviceId": {
+        "bsonType": "string"
+      },
+      "safeAreaId": {
+        "bsonType": "string"
+      },
+      "dateAdded": {
+        "bsonType": "date"
+      },
+      "privateKey": {
+        "bsonType": "string"
+      },
+      "isEnabled": {
+        "bsonType": "bool"
+      }
+    }
+  }
+}

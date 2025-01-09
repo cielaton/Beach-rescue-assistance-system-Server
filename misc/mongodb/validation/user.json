@@ -1,0 +1,34 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Users involves Administrator and Rescuer",
+    "required": [
+      "userId",
+      "name",
+      "email",
+      "password",
+      "role",
+      "workingSite"
+    ],
+    "properties": {
+      "userId": {
+        "bsonType": "string"
+      },
+      "name": {
+        "bsonType": "string"
+      },
+      "email": {
+        "bsonType": "string"
+      },
+      "password": {
+        "bsonType": "string"
+      },
+      "role": {
+        "bsonType": "string"
+      },
+      "workingSite": {
+        "bsonType": "string"
+      }
+    }
+  }
+}
