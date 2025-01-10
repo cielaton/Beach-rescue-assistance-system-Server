@@ -44,11 +44,12 @@ func main() {
 	if err != nil {
 		log.Fatal().Err(err).Msg("[Server] Error loading .env file")
 	}
+	log.Info().Msg("[Server] Successfully loaded .env file")
 
 	// Database connect
-	_, err = database.DatabaseConnect()
+	_, err = database.Connect()
 	if err != nil {
-		log.Fatal().Err(err).Msg("[Server] Error connecting to database")
+		log.Fatal().Msg("[Server] Error connecting to database")
 	}
 
 	echoServer.GET("/", func(echoContext echo.Context) error {
