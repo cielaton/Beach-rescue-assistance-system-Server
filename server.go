@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -47,7 +48,7 @@ func main() {
 	log.Info().Msg("[Server] Successfully loaded .env file")
 
 	// Database connect
-	_, err = database.Connect()
+	databaseClient, err := database.Connect()
 	if err != nil {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
@@ -56,4 +57,12 @@ func main() {
 		return echoContext.String(http.StatusOK, "Hello, World!")
 	})
 	echoServer.Logger.Fatal(echoServer.Start(":8080"))
+
+	// Disconnect the database
+	if databaseClient != nil {
+		err = databaseClient.Disconnect(context.Background())
+		if err != nil {
+			panic(err)
+		}
+	}
 }
