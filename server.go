@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"os"
 	"server/database"
-	"server/database/device"
+	"server/database/location"
 	"time"
 )
 
@@ -55,7 +55,7 @@ func main() {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
 
-	result, err := device.GetDevice(databaseClient)
+	result, err := location.GetLocation(databaseClient)
 	fmt.Printf("%+v\n", result)
 
 	echoServer.GET("/", func(echoContext echo.Context) error {
