@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -10,6 +11,7 @@ import (
 	"net/http"
 	"os"
 	"server/database"
+	"server/database/device"
 	"time"
 )
 
@@ -52,6 +54,9 @@ func main() {
 	if err != nil {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
+
+	result, err := device.GetDevice(databaseClient)
+	fmt.Printf("%+v\n", result)
 
 	echoServer.GET("/", func(echoContext echo.Context) error {
 		return echoContext.String(http.StatusOK, "Hello, World!")
