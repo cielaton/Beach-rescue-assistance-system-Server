@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"os"
 	"server/database"
-	"server/database/location"
+	safe_area "server/database/safe-area"
 	"time"
 )
 
@@ -55,7 +55,7 @@ func main() {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
 
-	result, err := location.GetLocation(databaseClient)
+	result, err := safe_area.GetSafeArea(databaseClient)
 	fmt.Printf("%+v\n", result)
 
 	echoServer.GET("/", func(echoContext echo.Context) error {

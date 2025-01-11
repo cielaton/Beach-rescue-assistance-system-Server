@@ -18,3 +18,14 @@ type Device struct {
 	PrivateKey string    `json:"privateKey"`
 	IsEnabled  bool      `json:"isEnabled"`
 }
+
+type SafeAreaLocation struct {
+	Longitude float64 `json:"longitude"`
+	Latitude  float64 `json:"latitude"`
+}
+type SafeArea struct {
+	SafeAreaId   string             `json:"safeAreaId"`
+	DeviceId     string             `json:"deviceId"`
+	LocationName string             `json:"locationName"`
+	Boundary     []SafeAreaLocation `json:"boundary"`
+}
