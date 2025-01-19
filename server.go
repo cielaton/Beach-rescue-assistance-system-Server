@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -11,7 +10,7 @@ import (
 	"net/http"
 	"os"
 	"server/database"
-	safe_area "server/database/safe-area"
+	"server/handler"
 	"time"
 )
 
@@ -55,11 +54,11 @@ func main() {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
 
-	result, err := safe_area.GetSafeArea(databaseClient)
-	fmt.Printf("%+v\n", result)
-
 	echoServer.GET("/", func(echoContext echo.Context) error {
 		return echoContext.String(http.StatusOK, "Hello, World!")
+	})
+	echoServer.GET("/device", func(echoContext echo.Context) error {
+		return handler.GetDeviceHandler(echoContext, databaseClient)
 	})
 	echoServer.Logger.Fatal(echoServer.Start(":8080"))
 
