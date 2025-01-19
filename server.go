@@ -53,12 +53,15 @@ func main() {
 	if err != nil {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
-
 	echoServer.GET("/", func(echoContext echo.Context) error {
 		return echoContext.String(http.StatusOK, "Hello, World!")
 	})
 	echoServer.GET("/device", func(echoContext echo.Context) error {
 		return handler.GetDeviceHandler(echoContext, databaseClient)
+	})
+
+	echoServer.GET("/user", func(echoContext echo.Context) error {
+		return handler.GetUserHandler(echoContext, databaseClient)
 	})
 	echoServer.Logger.Fatal(echoServer.Start(":8080"))
 

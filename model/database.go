@@ -2,6 +2,15 @@ package model
 
 import "time"
 
+type User struct {
+	UserId      string `json:"userId"`
+	Name        string `json:"name"`
+	Email       string `json:"email"`
+	Password    string `json:"password"`
+	Role        string `json:"role"`
+	WorkingSite string `json:"workingSite"`
+}
+
 type Location struct {
 	DeviceId      string    `json:"deviceId"`
 	DatePublished time.Time `json:"datePublished"`
