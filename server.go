@@ -63,8 +63,12 @@ func main() {
 	echoServer.GET("/user", func(echoContext echo.Context) error {
 		return handler.GetUserHandler(echoContext, databaseClient)
 	})
-	echoServer.Logger.Fatal(echoServer.Start(":8080"))
+	echoServer.POST("/location", func(echoContext echo.Context) error {
+		return handler.GetLocationHandler(echoContext, databaseClient)
+	})
 
+	// Start the server
+	echoServer.Logger.Fatal(echoServer.Start(":8080"))
 	// Disconnect the database
 	if databaseClient != nil {
 		err = databaseClient.Disconnect(context.Background())
