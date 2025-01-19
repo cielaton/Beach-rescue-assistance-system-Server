@@ -14,17 +14,25 @@ func GetLocationHandler(echoContext echo.Context, database *mongo.Client) error 
 	var requestBody model.LocationRequest
 	err := echoContext.Bind(&requestBody)
 	if err != nil {
-		log.Err(err).Msg("[Location] Invalid request body")
+		msg := "[Location] Invalid request body"
+		log.Err(err).Msg(msg)
 		return echoContext.JSON(http.StatusBadRequest,
-			map[string]any{"error": err.Error()})
+			map[string]any{
+				"message": msg,
+				"error":   err.Error(),
+			})
 	}
 
 	// Get the locations
 	locations, err := location.GetLocation(requestBody.DeviceIds, database)
 	if err != nil {
-		log.Err(err).Msg("[Database] Failed to get locations ")
+		msg := "[Location] Failed to get location"
+		log.Err(err).Msg(msg)
 		return echoContext.JSON(http.StatusInternalServerError,
-			map[string]any{"error": err.Error()})
+			map[string]any{
+				"message": msg,
+				"error":   err.Error(),
+			})
 	}
 
 	return echoContext.JSON(http.StatusOK, locations)
