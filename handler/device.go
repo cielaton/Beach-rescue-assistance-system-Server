@@ -8,7 +8,14 @@ import (
 )
 
 func GetDeviceHandler(echoContext echo.Context, database *mongo.Client) error {
-	deviceResult, err := device.GetDevice(database)
+	// Get the query parameter
+	queryParam := echoContext.QueryParam("deviceId")
+	if len(queryParam) == 0 {
+		return echoContext.JSON(http.StatusBadRequest, map[string]any{
+			"message": "Empty query parameter",
+		})
+	}
+	deviceResult, err := device.GetDevice("abcd", database)
 
 	if err != nil {
 		return echoContext.JSON(http.StatusInternalServerError, err.Error())
