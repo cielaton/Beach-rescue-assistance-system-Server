@@ -8,14 +8,14 @@ import (
 	"server/model"
 )
 
-func GetSafeArea(database *mongo.Client) (model.SafeArea, error) {
+func GetSafeArea(safeAreaId string, database *mongo.Client) (model.SafeArea, error) {
 	var safeArea = model.SafeArea{}
 	// Get the collection
-	collection := database.Database("Beach-Rescue-Assistance-System").Collection("Safe-Area")
+	collection := database.Database("Beach-Rescue-Assistance-System").Collection("Safe_Area")
 
 	// Get the safeArea
 	// Specify the query field
-	filter := bson.D{{"safeAreaId", "abcd"}}
+	filter := bson.D{{"safeAreaId", safeAreaId}}
 	err := collection.FindOne(context.Background(), filter).Decode(&safeArea)
 	if err != nil {
 		log.Err(err).Msg("[Database] Failed to get safeArea info")

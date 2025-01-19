@@ -66,6 +66,9 @@ func main() {
 	echoServer.POST("/location", func(echoContext echo.Context) error {
 		return handler.GetLocationHandler(echoContext, databaseClient)
 	})
+	echoServer.GET("/safe-area", func(echoContext echo.Context) error {
+		return handler.GetSafeAreaHandler(echoContext, databaseClient)
+	})
 
 	// Start the server
 	echoServer.Logger.Fatal(echoServer.Start(":8080"))

@@ -34,7 +34,7 @@ type SafeAreaLocation struct {
 }
 type SafeArea struct {
 	SafeAreaId   string             `json:"safeAreaId"`
-	DeviceId     string             `json:"deviceId"`
+	DeviceIds    []string           `json:"deviceIds"`
 	LocationName string             `json:"locationName"`
 	Boundary     []SafeAreaLocation `json:"boundary"`
 }
