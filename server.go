@@ -53,16 +53,24 @@ func main() {
 	if err != nil {
 		log.Fatal().Msg("[Server] Error connecting to database")
 	}
+
+	// API routes
+	// Root
 	echoServer.GET("/", func(echoContext echo.Context) error {
 		return echoContext.String(http.StatusOK, "Hello, World!")
 	})
-	echoServer.GET("/device", func(echoContext echo.Context) error {
-		return handler.GetDeviceHandler(echoContext, databaseClient)
+	// Device
+	echoServer.GET("/device/byDeviceId/:deviceId", func(echoContext echo.Context) error {
+		return handler.GetDeviceByIdHandler(echoContext, databaseClient)
 	})
-
+	echoServer.GET("/device/bySafeAreaId/:safeAreaId", func(echoContext echo.Context) error {
+		return handler.GetDeviceBySafeAreaIdHandler(echoContext, databaseClient)
+	})
+	// User
 	echoServer.GET("/user", func(echoContext echo.Context) error {
 		return handler.GetUserHandler(echoContext, databaseClient)
 	})
+	//Location
 	echoServer.POST("/location", func(echoContext echo.Context) error {
 		return handler.GetLocationHandler(echoContext, databaseClient)
 	})
