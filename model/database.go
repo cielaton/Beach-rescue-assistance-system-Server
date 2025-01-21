@@ -22,7 +22,7 @@ type Location struct {
 
 type Device struct {
 	DeviceId   string    `json:"deviceId"`
-	SafeAreaId string    `json:"datePublished"`
+	SafeAreaId string    `json:"safeAreaId"`
 	DateAdded  time.Time `json:"dateAdded"`
 	PrivateKey string    `json:"privateKey"`
 	IsEnabled  bool      `json:"isEnabled"`
