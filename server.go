@@ -74,6 +74,7 @@ func main() {
 	echoServer.POST("/location", func(echoContext echo.Context) error {
 		return handler.GetLocationHandler(echoContext, databaseClient)
 	})
+	// Safe Area
 	echoServer.GET("/safe-area", func(echoContext echo.Context) error {
 		return handler.GetSafeAreaHandler(echoContext, databaseClient)
 	})
@@ -83,6 +84,10 @@ func main() {
 	})
 	echoServer.GET("/rescuer/bySafeAreaId/:safeAreaId", func(echoContext echo.Context) error {
 		return handler.GetRescuerBySafeAreaIdHandler(echoContext, databaseClient)
+	})
+	// Rescuer Location
+	echoServer.POST("/rescuer-location", func(echoContext echo.Context) error {
+		return handler.GetRescuerLocationHandler(echoContext, databaseClient)
 	})
 
 	// Start the server
