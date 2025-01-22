@@ -38,3 +38,22 @@ type SafeArea struct {
 	LocationName string             `json:"locationName"`
 	Boundary     []SafeAreaLocation `json:"boundary"`
 }
+
+type Rescuer struct {
+	RescuerId  string    `json:"rescuerId"`
+	SafeAreaId string    `json:"safeAreaId"`
+	Name       string    `json:"name"`
+	Role       string    `json:"role"`
+	DateAdded  time.Time `json:"dateAdded"`
+	PrivateKey string    `json:"privateKey"`
+	IsEnabled  bool      `json:"isEnabled"`
+}
+
+type RescuerLocation struct {
+	RescuerId     string    `json:"rescuerId"`
+	DatePublished time.Time `json:"datePublished"`
+	Description   string    `json:"description"`
+	Longitude     float64   `json:"longitude"`
+	Latitude      float64   `json:"latitude"`
+	StatusCode    int       `json:"statusCode"`
+}
