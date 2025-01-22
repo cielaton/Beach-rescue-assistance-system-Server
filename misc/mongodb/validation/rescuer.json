@@ -1,0 +1,38 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Rescuer Information",
+    "required": [
+      "rescuerId",
+      "safeAreaId",
+      "name",
+      "role",
+      "dateAdded",
+      "privateKey",
+      "isEnabled"
+    ],
+    "properties": {
+      "rescuerId": {
+        "bsonType": "string"
+      },
+      "safeAreaId": {
+        "bsonType": "string"
+      },
+      "name": {
+        "bsonType": "string"
+      },
+      "role": {
+        "bsonType": "string"
+      },
+      "dateAdded": {
+        "bsonType": "date"
+      },
+      "privateKey": {
+        "bsonType": "string"
+      },
+      "isEnabled": {
+        "bsonType": "bool"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Rescuer location",
+    "required": [
+      "rescuerId",
+      "datePublished",
+      "description",
+      "longitude",
+      "latitude",
+      "statusCode"
+    ],
+    "properties": {
+      "rescuerId": {
+        "bsonType": "string"
+      },
+      "datePublished": {
+        "bsonType": "date"
+      },
+      "description": {
+        "bsonType": "string"
+      },
+      "longitude": {
+        "bsonType": "double"
+      },
+      "latitude": {
+        "bsonType": "double"
+      },
+      "statusCode": {
+        "bsonType": "int"
+      }
+    }
+  }
+}
