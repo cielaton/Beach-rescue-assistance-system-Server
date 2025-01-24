@@ -6,6 +6,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"net/http"
 	"server/database/device"
+	"server/model"
 )
 
 func GetDeviceByIdHandler(echoContext echo.Context, database *mongo.Client) error {
@@ -23,7 +24,6 @@ func GetDeviceByIdHandler(echoContext echo.Context, database *mongo.Client) erro
 
 	if err != nil {
 		msg := "[Device] Failed to get device info"
-		log.Error().Msg(msg)
 		return echoContext.JSON(http.StatusInternalServerError, map[string]any{
 			"message": msg,
 			"error":   err.Error(),
@@ -48,7 +48,6 @@ func GetDeviceBySafeAreaIdHandler(echoContext echo.Context, database *mongo.Clie
 
 	if err != nil {
 		msg := "[Device] Failed to get device info"
-		log.Error().Msg(msg)
 		return echoContext.JSON(http.StatusInternalServerError, map[string]any{
 			"message": msg,
 			"error":   err.Error(),
@@ -80,5 +79,32 @@ func DeleteDeviceHandler(echoContext echo.Context, database *mongo.Client) error
 	}
 	return echoContext.JSON(http.StatusOK, map[string]any{
 		"message": "Device deleted",
+	})
+}
+
+func ChangeDeviceActiveStatus(echoContext echo.Context, database *mongo.Client) error {
+	// Bind the POST request body
+	var requestBody model.DeviceActiveChangeRequest
+	err := echoContext.Bind(&requestBody)
+	if err != nil {
+		msg := "[Device] Invalid request body"
+		return echoContext.JSON(http.StatusBadRequest,
+			map[string]any{
+				"message": msg,
+				"error":   err.Error(),
+			})
+	}
+
+	err = device.ChangeDeviceActiveStatus(requestBody.DeviceId, requestBody.Status, database)
+	if err != nil {
+		msg := "[Device] Failed to change device status"
+		return echoContext.JSON(http.StatusInternalServerError, map[string]any{
+			"message": msg,
+			"error":   err.Error(),
+		})
+	}
+
+	return echoContext.JSON(http.StatusOK, map[string]any{
+		"message": "Device status changed",
 	})
 }

@@ -7,3 +7,8 @@ type LocationRequest struct {
 type RescuerLocationRequest struct {
 	RescuerIds []string `json:"rescuerIds"`
 }
+
+type DeviceActiveChangeRequest struct {
+	DeviceId string `json:"deviceId"`
+	Status   bool   `json:"status"`
+}

@@ -69,6 +69,9 @@ func main() {
 	echoServer.DELETE("/device/:deviceId", func(echoContext echo.Context) error {
 		return handler.DeleteDeviceHandler(echoContext, databaseClient)
 	})
+	echoServer.POST("/device/activeStatus", func(echoContext echo.Context) error {
+		return handler.ChangeDeviceActiveStatus(echoContext, databaseClient)
+	})
 	// User
 	echoServer.GET("/user", func(echoContext echo.Context) error {
 		return handler.GetUserHandler(echoContext, databaseClient)
