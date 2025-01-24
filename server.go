@@ -66,6 +66,9 @@ func main() {
 	echoServer.GET("/device/bySafeAreaId/:safeAreaId", func(echoContext echo.Context) error {
 		return handler.GetDeviceBySafeAreaIdHandler(echoContext, databaseClient)
 	})
+	echoServer.DELETE("/device/:deviceId", func(echoContext echo.Context) error {
+		return handler.DeleteDeviceHandler(echoContext, databaseClient)
+	})
 	// User
 	echoServer.GET("/user", func(echoContext echo.Context) error {
 		return handler.GetUserHandler(echoContext, databaseClient)

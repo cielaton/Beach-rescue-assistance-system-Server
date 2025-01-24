@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/rs/zerolog/log"
 	"go.mongodb.org/mongo-driver/v2/mongo"
@@ -10,17 +9,17 @@ import (
 )
 
 func GetDeviceByIdHandler(echoContext echo.Context, database *mongo.Client) error {
-	// Get the query parameter
-	queryParam := echoContext.Param("deviceId")
-	if len(queryParam) == 0 {
-		msg := "[Device] Empty request parameter"
+	// Get the path parameter
+	pathParam := echoContext.Param("deviceId")
+	if len(pathParam) == 0 {
+		msg := "[Device] Empty path parameter"
 		log.Error().Msg(msg)
 		return echoContext.JSON(http.StatusBadRequest, map[string]any{
 			"error": msg,
 		})
 	}
 
-	deviceResult, err := device.GetDeviceByDeviceId(queryParam, database)
+	deviceResult, err := device.GetDeviceByDeviceId(pathParam, database)
 
 	if err != nil {
 		msg := "[Device] Failed to get device info"
@@ -35,18 +34,17 @@ func GetDeviceByIdHandler(echoContext echo.Context, database *mongo.Client) erro
 }
 
 func GetDeviceBySafeAreaIdHandler(echoContext echo.Context, database *mongo.Client) error {
-	// Get the query parameter
-	queryParam := echoContext.Param("safeAreaId")
-	fmt.Println(queryParam)
-	if len(queryParam) == 0 {
-		msg := "[Device] Empty request parameter"
+	// Get the path parameter
+	pathParam := echoContext.Param("safeAreaId")
+	if len(pathParam) == 0 {
+		msg := "[Device] Empty path parameter"
 		log.Error().Msg(msg)
 		return echoContext.JSON(http.StatusBadRequest, map[string]any{
 			"error": msg,
 		})
 	}
 
-	deviceResult, err := device.GetDeviceBySafeAreaId(queryParam, database)
+	deviceResult, err := device.GetDeviceBySafeAreaId(pathParam, database)
 
 	if err != nil {
 		msg := "[Device] Failed to get device info"
@@ -58,4 +56,29 @@ func GetDeviceBySafeAreaIdHandler(echoContext echo.Context, database *mongo.Clie
 	}
 
 	return echoContext.JSON(http.StatusOK, deviceResult)
+}
+
+func DeleteDeviceHandler(echoContext echo.Context, database *mongo.Client) error {
+	// Get the path parameter
+	pathParam := echoContext.Param("deviceId")
+	if len(pathParam) == 0 {
+		msg := "[Device] Empty path parameter"
+		log.Error().Msg(msg)
+		return echoContext.JSON(http.StatusBadRequest, map[string]any{
+			"error": msg,
+		})
+	}
+
+	err := device.DeleteDevice(pathParam, database)
+	if err != nil {
+		msg := "[Device] Failed to delete device"
+		log.Error().Msg(msg)
+		return echoContext.JSON(http.StatusInternalServerError, map[string]any{
+			"message": msg,
+			"error":   err.Error(),
+		})
+	}
+	return echoContext.JSON(http.StatusOK, map[string]any{
+		"message": "Device deleted",
+	})
 }
